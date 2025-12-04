@@ -1,88 +1,185 @@
-# 🛒 Retail Sales Analytics Pipeline
+<h1 align="center">❄️ Retail Sales Analytics Pipeline</h1>
 
-A fully automated end-to-end data pipeline built using **Snowflake, Snowpipe, Streams & Tasks, Snowpark, dbt, and AWS S3**, designed to process large-scale retail sales datasets for business insights and analytics.
+<p align="center">
+  <img src="https://img.shields.io/badge/Snowflake-Data%20Cloud-blue" />
+  <img src="https://img.shields.io/badge/dbt-Transformations-orange" />
+  <img src="https://img.shields.io/badge/Snowpark-Python-yellow" />
+  <img src="https://img.shields.io/badge/AWS-S3-ff9900" />
+</p>
 
----
+<hr>
 
-## 🚀 Architecture (Medallion)
+<h2>📌 Overview</h2>
+<p>
+A fully automated <strong>Event-Driven Retail Sales Data Pipeline</strong> built using 
+<strong>Snowflake, AWS S3, Snowpipe, Streams & Tasks, Snowpark, and dbt</strong>.  
+The system ingests retail data in near real-time, cleans and validates it in the Silver layer,  
+builds analytics-ready star schema models in the Gold layer, and generates
+business insights supporting decisions like pricing optimization, customer segmentation,
+discount effectiveness, and return analysis.
+</p>
 
-| Layer | Technology | Purpose |
-|------|------------|---------|
-| **Bronze – Raw** | Snowpipe + S3 + Streams | Auto-ingest raw parquet data and track changes | 
-| **Silver – Cleaned / Standardized** | Snowpark + dbt + Audit Logs | Data quality checks, dedupe, schema validation, cleansing |
-| **Gold – Dimensional Model** | SCD-Type 2 + CDC + Tasks | Fact & Dim models with historical tracking and incremental loads |
+<h3>🎯 Key Goals</h3>
+<ul>
+  <li>Build enterprise-grade medallion architecture (Bronze → Silver → Gold)</li>
+  <li>Automate ingestion, transformation & incremental CDC processing</li>
+  <li>Ensure trustable data using data-quality checks + audit logs</li>
+  <li>Enable fast analytical/reporting performance with star schema</li>
+</ul>
 
-📌 References:  
-Bronze Layer Setup → :contentReference[oaicite:0]{index=0}  
-Silver Layer ETL/DBT/Audit Logic → :contentReference[oaicite:1]{index=1}  
-Gold SCD-2 & Streams/Tasks → (from Gold_layer.sql — full script truncated in preview)  
-Time Travel Features → :contentReference[oaicite:2]{index=2}  
+<hr>
 
----
+<h2>⚙️ Features</h2>
+<ul>
+  <li><strong>Real-time Auto-Ingestion:</strong> via Snowpipe from AWS S3 buckets</li>
+  <li><strong>CDC Handling:</strong> Snowflake Streams capture newly arrived or modified rows</li>
+  <li><strong>Task-Orchestrated Pipelines:</strong> scheduled & dependency-driven workflows</li>
+  <li><strong>Data Quality Enforcement:</strong>
+    <ul>
+      <li>Missing/invalid value handling (Snowpark)</li>
+      <li>dbt tests (unique, not_null, relationships)</li>
+      <li>Audit logs for tracking before/after row counts</li>
+    </ul>
+  </li>
+  <li><strong>SCD-Type 2:</strong> Maintain historical dimension changes</li>
+  <li><strong>Business Mart Creation:</strong> Pricing & Revenue KPI views</li>
+  <li><strong>Time Travel Enabled:</strong> rollback + historical comparison</li>
+</ul>
 
-## 🧹 Data Quality Rules
+<hr>
 
-✔ Null handling  
-✔ Invalid number replacement  
-✔ Phone formatting  
-✔ Business rule enforcement (discount, pricing validation)  
-✔ Deduplication using dbt  
-✔ Row-level Audit Logging before/after every cleanup step  
-✔ Referential validation in dbt tests  
+<h2>📊 Data Modeling (Star Schema)</h2>
+<p align="center">
+  ![Data_Modelling](https://github.com/user-attachments/assets/ea3d84c5-9dd4-47b9-b7b6-f07a8b05b9f9)
+</p>
+<p align="center">
+  <em>All dimensions link directly to FACT_SALES for fast aggregation</em>
+</p>
 
-Example: Silver audit log table created and updated during Snowpark execution  
-→ :contentReference[oaicite:3]{index=3}
+<hr>
 
----
+<h2>🏗️ Medallion Architecture</h2>
 
-## 🧬 SCD Type-2 & Incremental Loads
+<h3>🟤 Bronze Layer (Raw)</h3>
+<ul>
+  <li>Landing zone for unmodified Parquet files from S3</li>
+  <li>Preserves lineage + source of truth</li>
+  <li>Schematized into raw ingestion tables via Snowpipe</li>
+</ul>
 
-| Entity | Method | Details |
-|--------|--------|---------|
-| Dimensions | Merge + history tracking | Maintain versioned customer/product details |
-| Fact tables | Incremental mode | Only new or updated rows processed via Streams |
+<h3>⚪ Silver Layer (Cleaned + Validated)</h3>
+<ul>
+  <li>Snowpark Python performs cleansing & standardization</li>
+  <li>dbt performs complex incremental transformations & deduplication</li>
+  <li>Audit logs recorded for every transformation</li>
+</ul>
 
-CDC + Scheduled automation via Streams & Tasks  
-→ Configurations in Gold Layer SQL
+<h3>🟡 Gold Layer (Star Schema)</h3>
+<ul>
+  <li>Dimensional modeling optimized for BI/Analytics</li>
+  <li>SCD2 applied on Customer, Supplier, and Part Dimensions</li>
+  <li>Fact table supports incremental merge using Streams</li>
+</ul>
 
----
+<hr>
 
-## 📊 Analytics Outputs
+<h2>📈 Business Analytics Outputs</h2>
+<ul>
+  <li>Monthly, Quarterly & Annual Sales-Revenue Trends</li>
+  <li>Campaign & Pricing Effectiveness Analysis</li>
+  <li>Return vs Sales Performance</li>
+  <li>Product Profitability & Discount Insights</li>
+  <li>Customer Segmentation & Behavioral Metrics</li>
+</ul>
 
-Created Analytical Views for:
+<hr>
 
-- Pricing Trends (Monthly, Quarterly, Yearly)
-- Discount Effectiveness
-- Returned Products
-- Line-item Performance
-- Customer and Market Segment insights  
+<h2>🧠 Tech Stack</h2>
 
-Views Reference → Aggregated_Views.sql  
-→ :contentReference[oaicite:4]{index=4}
+<table>
+<thead>
+<tr><th>Category</th><th>Tools / Services</th></tr>
+</thead>
+<tbody>
+<tr><td>Cloud Data Warehouse</td><td>Snowflake</td></tr>
+<tr><td>Ingestion</td><td>Snowpipe + S3 External Stage</td></tr>
+<tr><td>Streaming</td><td>Snowflake Streams</td></tr>
+<tr><td>Orchestration</td><td>Snowflake Tasks</td></tr>
+<tr><td>Transformation</td><td>dbt + SQL + Snowpark</td></tr>
+<tr><td>Data Validation</td><td>Audit Logs + dbt Tests</td></tr>
+<tr><td>Retention & Recovery</td><td>Time-Travel + Fail-safe</td></tr>
+</tbody>
+</table>
 
----
+<hr>
 
-## 🧠 Technology Stack
+<h2>🔄 Pipeline Flow</h2>
+<pre>
+AWS S3 (Parquet Files)
+        ↓
+Bronze Layer → Snowpipe → Raw Tables
+        ↓
+Snowpark Cleansing + dbt Models
+        ↓
+Silver Layer → Validated & Standardized Data
+        ↓
+Streams + Tasks + SCD2 Merges
+        ↓
+Gold Layer → Star Schema (Fact & Dimension Tables)
+        ↓
+BI Tools / Reports / KPIs
+</pre>
 
-| Category | Tool |
-|---------|------|
-| Cloud DW | Snowflake |
-| Storage | AWS S3 |
-| Ingestion | Snowpipe |
-| Change Data Capture | Streams |
-| Orchestration | Tasks |
-| Processing | Snowpark (Python) |
-| Transformations | dbt |
-| File Format | Parquet |
+<hr>
 
----
+<h2>📁 Repo Structure</h2>
+<pre>
+├── Bronze_layer.sql
+├── Silver_layer.sql
+├── Gold_layer.sql
+├── Aggregated_Views.sql
+├── Time_Travel.sql
+└── Data_Modelling.jpg
+</pre>
 
-## 📁 Repo Contents
+<hr>
 
-```text
-├── Bronze_layer.sql        # Raw ingestion + Streams setup
-├── Silver_layer.sql        # Snowpark cleaning + Staging loads + dbt merges
-├── Gold_layer.sql          # Star schema + SCD Type-2 Dimensions + Fact Tables
-├── Aggregated_Views.sql    # Analytical pricing & discount summaries
-├── Time_Travel.sql         # Data retention & rollback configurations
-└── Retail Sales Analysis.pdf # Case study documentation
+<h2>🚀 Setup (How to Run)</h2>
+<ul>
+  <li>Configure Snowflake + S3 External Stage</li>
+  <li>Execute Bronze scripts → enable auto-ingest</li>
+  <li>Run Silver cleansing procedures + dbt models</li>
+  <li>Schedule Gold incremental tasks</li>
+</ul>
+
+<hr>
+
+<h2>📊 Outcomes & Learnings</h2>
+<ul>
+  <li>Efficient near real-time BI reporting</li>
+  <li>100% automated CDC and SCD-2 transformations</li>
+  <li>High data quality and governance via audit logs + dbt</li>
+  <li>Low-maintenance and scalable pipeline</li>
+</ul>
+
+<hr>
+
+<h2>🚀 Future Enhancements</h2>
+<ul>
+  <li>Add Power BI / Tableau Dashboards</li>
+  <li>Include ML models for sales predictions</li>
+  <li>Enable anomaly detection for fraudulent returns</li>
+</ul>
+
+<hr>
+
+<h2>🤝 Contributing</h2>
+<p>Fork → Modify → Pull Request. Issues welcome!</p>
+
+<h2>📜 License</h2>
+<p>MIT License</p>
+
+<p align="center">
+💡 Designed & Developed by <strong>Vishnu Vardhan</strong>  
+<br/>Data Engineering Enthusiast | India 🇮🇳
+</p>
