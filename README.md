@@ -50,7 +50,7 @@ discount effectiveness, and return analysis.
 
 <h2>📊 Data Modeling (Star Schema)</h2>
 <p align="center">
-  ![Data_Modelling](https://github.com/user-attachments/assets/ea3d84c5-9dd4-47b9-b7b6-f07a8b05b9f9)
+  Project/Data_Modelling.jpg
 </p>
 <p align="center">
   <em>All dimensions link directly to FACT_SALES for fast aggregation</em>
