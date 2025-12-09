@@ -5,6 +5,7 @@
   <img src="https://img.shields.io/badge/dbt-Transformations-orange" />
   <img src="https://img.shields.io/badge/Snowpark-Python-yellow" />
   <img src="https://img.shields.io/badge/AWS-S3-ff9900" />
+  <img src="https://img.shields.io/badge/PySpark-Big%20Data-red" />
 </p>
 
 <hr>
@@ -135,12 +136,20 @@ BI Tools / Reports / KPIs
 
 <h2>📁 Repo Structure</h2>
 <pre>
-├── Bronze_layer.sql
-├── Silver_layer.sql
-├── Gold_layer.sql
-├── Aggregated_Views.sql
-├── Time_Travel.sql
-└── Data_Modelling.jpg
+├── Medallion Architecture
+  ├── Bronze_layer
+    ├── Bronze_layer.sql
+  ├── Silver_layer
+    ├── silver_layer.sql
+    ├── Snowpark
+    ├── Dbt_codes
+      ├── Models
+      ├── schema.yml
+  ├── Gold_Layer
+    ├── Gold_Layer.sql
+    ├── Aggregated_views.sql
+  ├── Time_Travel
+├── aws_glue.py
 </pre>
 
 <hr>
