@@ -12,7 +12,7 @@
 <h2>📌 Overview</h2>
 <p>
 A fully automated <strong>Event-Driven Retail Sales Data Pipeline</strong> built using 
-<strong>Snowflake, AWS S3, Snowpipe, Streams & Tasks, Snowpark, and dbt</strong>.  
+<strong>Snowflake, AWS S3, AWS GLUE, PySpark, Snowpipe, Streams & Tasks, Snowpark, and dbt</strong>.  
 The system ingests retail data in near real-time, cleans and validates it in the Silver layer,  
 builds analytics-ready star schema models in the Gold layer, and generates
 business insights supporting decisions like pricing optimization, customer segmentation,
