@@ -1,0 +1,24 @@
+version: 2
+
+sources:
+  - name: silver_layer
+    database: RETAIL_DB
+    schema: SILVER_LAYER
+
+    tables:
+      - name: customer_stg
+      - name: supplier_stg
+      - name: part_stg
+      - name: partsupp_stg
+      - name: region_stg
+      - name: nation_stg
+      - name: orders_stg
+      - name: lineitem_stg
+      - name: silver_customer
+      - name: silver_orders
+      - name: silver_supplier
+      - name: silver_part
+      - name: silver_partsupp
+      - name: silver_region
+      - name: silver_nation
+      - name: silver_lineitem
