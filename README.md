@@ -12,7 +12,7 @@
 <h2>📌 Overview</h2>
 <p>
 A fully automated <strong>Event-Driven Retail Sales Data Pipeline</strong> built using 
-<strong>Snowflake, AWS S3, Snowpipe, Streams & Tasks, Snowpark, and dbt</strong>.  
+<strong>Snowflake, AWS S3, AWS GLUE, PySpark, Snowpipe, Streams & Tasks, Snowpark, and dbt</strong>.  
 The system ingests retail data in near real-time, cleans and validates it in the Silver layer,  
 builds analytics-ready star schema models in the Gold layer, and generates
 business insights supporting decisions like pricing optimization, customer segmentation,
@@ -62,6 +62,7 @@ discount effectiveness, and return analysis.
 
 <h3>🟤 Bronze Layer (Raw)</h3>
 <ul>
+  <li>Converting raw csv files into Parquet files by creating job in AWS GLUE using PySpark Script </li>
   <li>Landing zone for unmodified Parquet files from S3</li>
   <li>Preserves lineage + source of truth</li>
   <li>Schematized into raw ingestion tables via Snowpipe</li>
