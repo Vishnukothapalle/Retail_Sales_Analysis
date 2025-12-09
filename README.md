@@ -62,7 +62,7 @@ discount effectiveness, and return analysis.
 
 <h3>🟤 Bronze Layer (Raw)</h3>
 <ul>
-  <li>Converting raw csv files into Parquet files by creating job in AWS GLUE using PySpark Script <li>
+  <li>Converting raw csv files into Parquet files by creating job in AWS GLUE using PySpark Script </li>
   <li>Landing zone for unmodified Parquet files from S3</li>
   <li>Preserves lineage + source of truth</li>
   <li>Schematized into raw ingestion tables via Snowpipe</li>
